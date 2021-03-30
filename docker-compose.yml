@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3696:3306"
+    networks:
+      - mynetwork
+    environment:
+        MYSQL_DATABASE: goodfood
+        MYSQL_ROOT_PASSWORD: abc123
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=abc123
+    networks:
+      - mynetwork
+    ports:
+        - "90:80"
+
+
+  apache:
+    build: ./Docker
+    volumes:
+      - ./src/goodfood:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    external: true
