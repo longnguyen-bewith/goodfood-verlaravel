@@ -3,6 +3,7 @@ FROM php:7.3-apache
 COPY ./*.conf /etc/apache2/sites-enabled/
 COPY ./php.ini /usr/local/etc/php/php.ini
 
+RUN /bin/sh -c a2enmod rewrite
 RUN apt-get update && apt-get install -y vim
 RUN docker-php-ext-install mysqli pdo_mysql
 
