@@ -78,7 +78,7 @@ $data = $request->validate([
 $user = User::find($request->id );
         $user->update([
             'email' => $request->email,
-            'password'=> $request->password
+            'password'=> Hash::make($request->password),
         ]);
 return redirect('/userinfo')->with('status', 'パスワード変更しました!');
 }
