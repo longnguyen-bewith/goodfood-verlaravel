@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/hello', function () {
     return "Hello";
 });
+Route::get('/userinfo', 'UserinfoController@index')->name('userinfo');
+Route::get('/userinfo/edit', 'UserinfoController@edit')->name('edituserinfo');
+Route::post('/userinfo/update', 'UserinfoController@update')->name('updateuserinfo');
 
 
 Auth::routes();
