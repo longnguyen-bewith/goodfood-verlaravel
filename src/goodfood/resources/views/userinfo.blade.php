@@ -28,14 +28,21 @@
                         <div class="col-md-4 col-form-label text-md-right">{{ __('アカウント種別')}}
                         </div>
                         <div class="col-md-4 col-form-label text-md-left">{{ __(Auth::user()->type) }}
-                        </div>
+                        </div>    
                     </div>
+                     @if(session('status'))
+                            <div class="alert alert-success text-center" role="alert">
+                                <strong> {{ session('status') }} 
+                                    </strong>
+                            </div>
+                        @endif     
+                   
                     <div class="row">
                         <div class="col-md-6 offset-md-3 mt-4">
                             <a href="{{ route('edituserinfo') }}" ><button class="btn btn-primary">
-                            {{ __('メールアドレス、パスワード変更') }}
-                            </button>
-                        </a>
+                                {{ __('メールアドレス、パスワード変更') }}
+                                </button>
+                            </a>
                         </div>
                     </div>
                     
