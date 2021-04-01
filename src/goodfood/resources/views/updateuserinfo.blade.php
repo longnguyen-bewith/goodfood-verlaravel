@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('updateuserinfo') }}">
                         @csrf
+                        <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                         <div class="row">
                         <div class="col-md-4 col-form-label text-md-right">{{ __('ユーザ名')}}
                         </div>
@@ -62,7 +63,7 @@
                         <div class="form-group row ">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('情報更新') }}
                                 </button>
                             </div>
                         </div>
