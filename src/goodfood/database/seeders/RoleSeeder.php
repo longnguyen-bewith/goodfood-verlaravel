@@ -16,7 +16,7 @@ $data = [];
 for($i=1;$i<=10; $i++) {
 $role=["和食","洋食","中華料理","焼肉","麺料理 ","カフェ","その他 "];
 shuffle($role);
-	for($j=0;$j<rand(0,7);$j++){
+	for($j=0;$j<=rand(0,6);$j++){
 $data[] = [
 "sid"=>$i,
 "role"=>$role[$j],
