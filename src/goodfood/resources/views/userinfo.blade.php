@@ -7,27 +7,27 @@
                 <div class="card-header">{{ __('会員情報') }}</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4 col-form-label text-md-right">{{ __('ユーザ名')}}
+                        <div class="col-md-6 col-form-label text-md-right">{{ __('ユーザ名')}}
                         </div>
-                        <div class="col-md-4 col-form-label text-md-left">{{ __(Auth::user()->username) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-form-label text-md-right">{{ __('名前')}}
-                        </div>
-                        <div class="col-md-4 col-form-label text-md-left">{{ __(Auth::user()->name) }}
+                        <div class="col-md-6 col-form-label text-md-left">{{ __(Auth::user()->username) }}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス')}}
+                        <div class="col-md-6 col-form-label text-md-right">{{ __('名前')}}
                         </div>
-                        <div class="col-md-4 col-form-label text-md-left">{{ __(Auth::user()->email) }}
+                        <div class="col-md-6 col-form-label text-md-left">{{ __(Auth::user()->name) }}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-form-label text-md-right">{{ __('アカウント種別')}}
+                        <div class="col-md-6 col-form-label text-md-right">{{ __('メールアドレス')}}
                         </div>
-                        <div class="col-md-4 col-form-label text-md-left">{{ __(Auth::user()->type) }}
+                        <div class="col-md-6 col-form-label text-md-left">{{ __(Auth::user()->email) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-form-label text-md-right">{{ __('アカウント種別')}}
+                        </div>
+                        <div class="col-md-6 col-form-label text-md-left">{{ __(Auth::user()->type) }}
                         </div>    
                     </div>
                      @if(session('status'))
@@ -38,7 +38,7 @@
                         @endif     
                    
                     <div class="row">
-                        <div class="col-md-6 offset-md-3 mt-4">
+                        <div class="col-md-12 offset-md-4 mt-4">
                             <a href="{{ route('edituserinfo') }}" ><button class="btn btn-primary">
                                 {{ __('メールアドレス、パスワード変更') }}
                                 </button>
