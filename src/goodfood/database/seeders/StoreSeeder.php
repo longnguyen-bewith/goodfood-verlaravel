@@ -24,7 +24,7 @@ $file->setFlags(
 $store = [];
 foreach($file as $line) {
 $store[] = [
-"uid"=>rand(1,11),
+"uid"=>rand(0,10),
 "storename" => $line[0],
 "address" => $line[1],
 "opentime" => $line[2],

@@ -48,7 +48,7 @@
                                 {{ __('営業時間') }}
                             </label>
                             <div class="col-md-6">
-                                <select class="form-control" id="opentime">
+                                <select class="form-control" name="opentime" id="opentime">
                                     @for($i=0;$i<24;$i++)
                                     <option value="{{ $i  }}:00 ">
                                         {{ $i }}:00
@@ -61,12 +61,12 @@
                             @endfor
                                 </select>
                             </div>
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            @error('opentime')
+                          
                                 <strong>
                                     {{ $message }}
                                 </strong>
-                            </span>
+                            
                             @enderror
                         </div>
                         <div class="form-group row">
@@ -74,7 +74,7 @@
                                 {{ __('閉店時間') }}
                             </label>
                             <div class="col-md-6">
-                                <select class="form-control" id="closetime">
+                                <select class="form-control" name="closetime"id="closetime">
                                     @for($i=0;$i<24;$i++)
                                     <option value="{{ $i }}:00 ">
                                         {{ $i }}:00
@@ -87,12 +87,12 @@
                             @endfor
                                 </select>
                             </div>
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            @error('closetime')
+                          
                                 <strong>
                                     {{ $message }}
                                 </strong>
-                            </span>
+                         
                             @enderror
                         </div>
                         <div class="form-group row">
@@ -110,6 +110,15 @@
                                 </input>
                             </label>
                             @endfor
+                            @error('和食')
+                            <div class="text-danger">
+                                    <strong>
+                                            {{ "種別うち一つは必須です。" }}
+                                    </strong>
+                            </div>
+                            
+                            
+                            @enderror
                         </div>
                         
                         </div>
