@@ -14,6 +14,7 @@ class CreateStorecmtTable extends Migration
     public function up()
     {
         Schema::create('storecmt', function (Blueprint $table) {
+            $table->bigIncrements('cid');
             $table->foreignId('uid');
             $table->foreignId('sid');
             $table->longText('cmt');

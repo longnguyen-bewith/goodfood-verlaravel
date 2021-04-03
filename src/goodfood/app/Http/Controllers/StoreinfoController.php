@@ -70,21 +70,32 @@ class StoreinfoController extends Controller
         return redirect('/storeinfo/' . $request->sid);;
     }
 
-     public function signstore()
+     public function signstore(Request $request)
     {
 //
         $uid = Auth::user()->id;
         $data = $request->validate([
-        'storename' => ['required','string','max:255'],
+        'storename' => ['required','string','max:255','unique:store'],
         'address' => ['required','string','max:255'],
+        'opentime' => ['required'],
+        'closetime' => ['required'],
+         '和食'=>['required_without_all:カフェ,その他,麺料理,中華料理,洋食,焼肉'],
+
         ]);
-        $time=now();
+         $sql  = "INSERT INTO `store`(`uid`,`storename`, `address`, `opentime`, `closetime`, `created_at`) VALUES ($uid,'$request->storename','$request->address','$request->opentime','$request->closetime',now())";
+        $db = DB::insert($sql);
+        $sid = DB::getPdo()->lastInsertId();
+        $role=["和食","洋食","中華料理","焼肉","麺料理","カフェ","その他"];
+        foreach($role as $in){
+            if($request->input($in)){
+            $sql="INSERT INTO `role`(`sid`, `role`) VALUES ($sid,'$in')";
+            $db = DB::insert($sql);
+            }
+        }
 
-        $sql  = "INSERT INTO `storecmt`(`uid`, `sid`, `cmt`, `votes`, `created_at`) VALUES ($uid,$request->sid,'$request->comment ',$request->point,now())";
-        $cmt= DB::insert($sql);
         
-
-        return redirect('/storeinfo/' . $request->sid);;
+        return redirect('/storeinfo/' . $sid);
+       
     }
 /**
  * Show the form for creating a new resource.
