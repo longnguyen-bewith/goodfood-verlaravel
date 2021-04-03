@@ -6,6 +6,7 @@
 - docker exec -it goodfood-verlaravel_apache_1 bash
 - a2enmod rewrite
 - exit
+- docker-compose restart
 
 ## migrate DB
 - open .env
