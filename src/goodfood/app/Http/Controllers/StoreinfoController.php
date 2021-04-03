@@ -38,6 +38,18 @@ class StoreinfoController extends Controller
         //return $islike;
     }
 
+     public function editstore(Request $request)
+    {
+//
+        $id=$request->sid;
+        $sql    = "SELECT * FROM `store` WHERE sid=$id";
+        $store   = DB::select($sql);
+        $sql    = "SELECT role FROM `role` WHERE sid=$id";
+        $data  = DB::select($sql);
+        return view('editstore', compact('data', 'store'));
+        //return $islike;
+    }
+
     public function like($id, $like)
     {
 //
@@ -59,6 +71,21 @@ class StoreinfoController extends Controller
         $sql  = "DELETE FROM `storecmt` WHERE cid=$request->cid";
         $data = DB::delete($sql);
         return redirect('/cmtedstore');
+        //return $cmt;
+    }
+
+        public function delstore(Request $request)
+    {
+//      
+        $sql  = "DELETE FROM `store` WHERE sid=$request->sid";
+        $data = DB::delete($sql);
+        $sql  = "DELETE FROM `storelike` WHERE sid=$request->sid";
+        $data = DB::delete($sql);
+        $sql  = "DELETE FROM `role` WHERE sid=$request->sid";
+        $data = DB::delete($sql);
+        $sql  = "DELETE FROM `storecmt` WHERE sid=$request->sid";
+        $data = DB::delete($sql);
+        return redirect('/signedstore');
         //return $cmt;
     }
 
@@ -104,6 +131,32 @@ class StoreinfoController extends Controller
 
         
         return redirect('/storeinfo/' . $sid);
+       
+    }
+
+     public function confirmeditstore(Request $request)
+    {
+//
+        $uid = Auth::user()->id;
+        $data = $request->validate([
+        'address' => ['required','string','max:255'],
+        'opentime' => ['required'],
+        'closetime' => ['required'],
+         '和食'=>['required_without_all:カフェ,その他,麺料理,中華料理,洋食,焼肉'],
+
+        ]);
+         $sql  = "UPDATE `store` SET `address`='$request->address',`opentime`='$request->opentime',`closetime`='$request->closetime',`updated_at`= now() WHERE $request->sid=sid";
+         $db = DB::update($sql); 
+         $sql  = "DELETE FROM `role` WHERE sid=$request->sid";
+        $data = DB::delete($sql);
+        $role=["和食","洋食","中華料理","焼肉","麺料理","カフェ","その他"];
+        foreach($role as $in){
+            if($request->input($in)){
+            $sql="INSERT INTO `role`(`sid`, `role`) VALUES ($request->sid,'$in')";
+            $db = DB::insert($sql);
+            }
+        }
+        return redirect('/storeinfo/' . $request->sid);
        
     }
         public function showsignstore()

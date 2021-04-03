@@ -32,6 +32,9 @@ Route::post('/cmtstore', 'StoreinfoController@cmtstore')->name('cmtstore');
 Route::get('/signstore/','StoreinfoController@showsignstore')->name('signstore');
 Route::post('/confirmstore', 'StoreinfoController@signstore')->name('confirmstore');
 Route::post('/delcmt', 'StoreinfoController@delcmt')->name('delcmt');
+Route::post('/delstore', 'StoreinfoController@delstore')->name('delstore');
+Route::post('/editstore', 'StoreinfoController@editstore')->name('editstore');
+Route::post('/confirmeditstore', 'StoreinfoController@confirmeditstore')->name('confirmeditstore');
 
 Auth::routes();
 

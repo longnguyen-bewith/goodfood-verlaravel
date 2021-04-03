@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -23,34 +22,39 @@
                     @else
                     <div class="row mt-4">
                         @foreach($store as $data)
-                        <div class="col-md-3 col-form-label ml-4">
+                        <div class="col-md-3 col-form-label ml-4 ">
                             <a href="/storeinfo/{{ $data->sid }}">
-                                <button class="btn btn-block btn-outline-info">
-                                    <p>
-                                        {{ __($data->storename) }}
-                                    </p>
-                                    <p>
-                                        {{ __($data->created_at) }}
-                                    </p>
+                                <button  class="btn btn-block btn-outline-info">
+                                <p>
+                                    {{ __($data->storename) }}
+                                </p>
                                 </button>
                             </a>
-                                    <div>
-                                        <button class="fa fa-edit btn btn-block btn-primary">
-                                            編集
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button class="fa fa-trash btn btn-block btn-outline-secondary">
-                                            削除
-                                        </button>
-                                    </div>
+                            <form method="POST" action="{{ route('editstore') }}">
+                                @csrf
+                            <div>
+                                <input type="hidden" name="sid" value="{{ $data->sid }}">
+                                <button class="fa fa-edit btn btn-block btn-primary">
+                                編集
+                                </button>
+                            </div>
+                        </form>
+                            <form method="POST" action="{{ route('delstore') }}">
+                                @csrf
+                                <div>
+                                <input type="hidden" name="sid" value="{{ $data->sid }}">
+                                    <button class="fa fa-trash btn btn-block btn-outline-secondary" type="submit" onclick="return confirm('削除しますか。')">
+                                    削除
+                                    </button>
+                                </div>
+                            </form>
                             
                         </div>
                         @endforeach
                     </div>
                     @endif
                 </div>
-                  <div class="card-footer ">
+                <div class="card-footer ">
                 </div>
             </div>
         </div>

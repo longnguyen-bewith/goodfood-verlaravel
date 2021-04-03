@@ -85,8 +85,8 @@
                 @yield('content')
             </main>
         </div>
-        <nav class="navbar fixed-bottom navbar-light bg-light">
-            <a class="navbar-brand" href="#">@2021 -NGUYEN THANH LONG</a>
+        <nav class="navbar fixed-bottom navbar-light  bg-white border-top border-secondary">
+            <a class="text-muted" href="#">@2021 -NGUYEN THANH LONG</a>
         </nav>
     </body>
 </html>
