@@ -97,6 +97,11 @@ class StoreinfoController extends Controller
         return redirect('/storeinfo/' . $sid);
        
     }
+        public function showsignstore()
+    {
+//  
+        return view('signstore');
+    }
 /**
  * Show the form for creating a new resource.
  *

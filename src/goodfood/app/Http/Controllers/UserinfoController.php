@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use DB;
 class UserinfoController extends Controller
 {
 public function __construct()
@@ -69,6 +71,19 @@ return view('updateuserinfo');
 * @param  int  $id
 * @return \Illuminate\Http\Response
 */
+
+public function signedstore()
+{
+//
+		$uid = Auth::user()->id;
+        $sql    = "SELECT count(*) times FROM `store` WHERE uid=$uid";
+        $times   = DB::select($sql);
+        $sql    = "SELECT *  FROM `store` WHERE uid=$uid";
+        $store   = DB::select($sql);
+
+        return view('signedstore',compact('times','store'));
+	
+}
 public function update(Request $request)
 {
 $data = $request->validate([
