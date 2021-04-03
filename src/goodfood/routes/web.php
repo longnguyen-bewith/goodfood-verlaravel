@@ -24,13 +24,14 @@ Route::get('/userinfo/edit', 'UserinfoController@edit')->name('edituserinfo');
 Route::post('/userinfo/update', 'UserinfoController@update')->name('updateuserinfo');
 Route::get('/signedstore', 'UserinfoController@signedstore')->name('signedstore');
 Route::get('/likedstore', 'UserinfoController@likedstore')->name('likedstore');
+Route::get('/cmtedstore', 'UserinfoController@cmtedstore')->name('cmtedstore');
 
 Route::get('/storeinfo/{id}', 'StoreinfoController@index')->name('storeinfo');
 Route::get('/likeordis/{id}/{like}', 'StoreinfoController@like')->name('likeordis');
 Route::post('/cmtstore', 'StoreinfoController@cmtstore')->name('cmtstore');
 Route::get('/signstore/','StoreinfoController@showsignstore')->name('signstore');
 Route::post('/confirmstore', 'StoreinfoController@signstore')->name('confirmstore');
-
+Route::post('/delcmt', 'StoreinfoController@delcmt')->name('delcmt');
 
 Auth::routes();
 

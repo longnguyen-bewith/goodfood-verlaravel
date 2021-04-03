@@ -53,6 +53,15 @@ class StoreinfoController extends Controller
         //return $cmt;
     }
 
+     public function delcmt(Request $request)
+    {
+//
+        $sql  = "DELETE FROM `storecmt` WHERE cid=$request->cid";
+        $data = DB::delete($sql);
+        return redirect('/cmtedstore');
+        //return $cmt;
+    }
+
     public function cmtstore(Request $request)
     {
 //

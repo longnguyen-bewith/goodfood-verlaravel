@@ -33,13 +33,14 @@
                                         {{ __($data->created_at) }}
                                     </p>
                                 </button>
+                            </a>
                                     <div>
-                                        <button class=" btn btn-block btn-primary">
+                                        <button class="fa fa-edit btn btn-block btn-primary">
                                             編集
                                         </button>
                                     </div>
                                     <div>
-                                        <button class="btn btn-block btn-outline-secondary">
+                                        <button class="fa fa-trash btn btn-block btn-outline-secondary">
                                             削除
                                         </button>
                                     </div>

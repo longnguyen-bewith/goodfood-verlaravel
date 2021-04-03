@@ -78,7 +78,7 @@ class UserinfoController extends Controller
         $uid   = Auth::user()->id;
         $sql   = "SELECT count(*) times FROM `store` WHERE uid=$uid";
         $times = DB::select($sql);
-        $sql   = "SELECT *  FROM `store` WHERE uid=$uid";
+        $sql   = "SELECT *  FROM `store` WHERE uid=$uid ORDER BY created_at DESC";
         $store = DB::select($sql);
 
         return view('signedstore', compact('times', 'store'));
@@ -94,6 +94,17 @@ class UserinfoController extends Controller
         $sql   = " SELECT * FROM `storelike` a JOIN store  b USING(sid) WHERE a.uid=$uid";
         $store = DB::select($sql);
         return view('likedstore',compact('times','store'));
+    }
+        public function cmtedstore()
+    {
+//	
+    	$uid   = Auth::user()->id;
+        $sql   = "SELECT count(*) times FROM `storecmt` WHERE uid=$uid";
+        $times = DB::select($sql);
+        $sql   = " SELECT storename,votes,a.created_at AS created_at ,sid,cmt ,cid FROM `storecmt` a JOIN store  b USING(sid) WHERE a.uid=$uid ORDER BY a.created_at DESC";
+        $store = DB::select($sql);
+   
+        return view('cmtedstore',compact('times','store'));
     }
     public function update(Request $request)
     {
