@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -17,13 +16,13 @@
                             </label>
                             <div class="col-md-6">
                                 <input autocomplete="storename" autofocus="" class="form-control @error('storename') is-invalid @enderror" id="storename" name="storename" required="" type="text" value="{{ old('storename') }}">
-                                    @error('storename')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                    @enderror
+                                @error('storename')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                    {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                                 </input>
                             </div>
                         </div>
@@ -33,13 +32,13 @@
                             </label>
                             <div class="col-md-6">
                                 <input autocomplete="address" autofocus="" class="form-control @error('address') is-invalid @enderror" id="address" name="address" required="" type="text" value="{{ old('address') }}">
-                                    @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                    @enderror
+                                @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>
+                                    {{ $message }}
+                                    </strong>
+                                </span>
+                                @enderror
                                 </input>
                             </div>
                         </div>
@@ -58,15 +57,13 @@
                                         {{ $i }}:30
                                     </option>
                                     ;
-                            @endfor
+                                    @endfor
                                 </select>
                             </div>
                             @error('opentime')
-                          
-                                <strong>
-                                    {{ $message }}
-                                </strong>
-                            
+                            <strong>
+                            {{ $message }}
+                            </strong>
                             @enderror
                         </div>
                         <div class="form-group row">
@@ -84,15 +81,13 @@
                                         {{ $i }}:30
                                     </option>
                                     ;
-                            @endfor
+                                    @endfor
                                 </select>
                             </div>
                             @error('closetime')
-                          
-                                <strong>
-                                    {{ $message }}
-                                </strong>
-                         
+                            <strong>
+                            {{ $message }}
+                            </strong>
                             @enderror
                         </div>
                         <div class="form-group row">
@@ -104,33 +99,32 @@
                             @endphp
                             <div class="checkbox col-md-6 mt-2">
                                 @for($i=0;$i<count($role);$i++)
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name={{ $role[$i] }} value={{ $role[$i] }} >
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name={{ $role[$i] }} value={{ $role[$i] }} >
                                     {{ $role[$i] }}
-                                </input>
-                            </label>
-                            @endfor
-                            @error('和食')
-                            <div class="text-danger">
+                                    </input>
+                                </label>
+                                @endfor
+                                @error('和食')
+                                <div class="text-danger">
                                     <strong>
-                                            {{ "種別うち一つは必須です。" }}
+                                    {{ "種別うち一つは必須です。" }}
                                     </strong>
+                                </div>
+                                @enderror
                             </div>
-                            
-                            
-                            @enderror
-                        </div>
-                        
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button class="btn btn-primary" type="submit">
-                                    {{ __('店舗登録') }}
+                                {{ __('店舗登録') }}
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="card-footer ">
             </div>
         </div>
     </div>

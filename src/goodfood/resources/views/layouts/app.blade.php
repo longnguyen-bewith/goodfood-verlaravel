@@ -33,7 +33,7 @@
                         ['route'=>'userinfo','label'=>'会員情報'],
                         ['route'=>'signstore','label'=>'店舗登録'],
                         ['route'=>'signedstore','label'=>'登録した店舗管理'],
-                        ['route'=>'home','label'=>'気に入った店舗'],
+                        ['route'=>'likedstore','label'=>'気に入った店舗'],
                         ['route'=>'home','label'=>'口コミ一覧']
                         ];
                         @endphp

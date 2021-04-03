@@ -23,7 +23,7 @@ Route::get('/userinfo', 'UserinfoController@index')->name('userinfo');
 Route::get('/userinfo/edit', 'UserinfoController@edit')->name('edituserinfo');
 Route::post('/userinfo/update', 'UserinfoController@update')->name('updateuserinfo');
 Route::get('/signedstore', 'UserinfoController@signedstore')->name('signedstore');
-
+Route::get('/likedstore', 'UserinfoController@likedstore')->name('likedstore');
 
 Route::get('/storeinfo/{id}', 'StoreinfoController@index')->name('storeinfo');
 Route::get('/likeordis/{id}/{like}', 'StoreinfoController@like')->name('likeordis');
