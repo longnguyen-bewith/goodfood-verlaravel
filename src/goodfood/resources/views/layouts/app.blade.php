@@ -32,9 +32,9 @@
                         ['route'=>'home','label'=>'ホーム'],
                         ['route'=>'userinfo','label'=>'会員情報'],
                         ['route'=>'signstore','label'=>'店舗登録'],
-                        ['route'=>'home','label'=>'登録した店舗管理'],
-                        ['route'=>'home','label'=>'気に入った店舗'],
-                        ['route'=>'home','label'=>'口コミ一覧']
+                        ['route'=>'signedstore','label'=>'登録した店舗管理'],
+                        ['route'=>'likedstore','label'=>'気に入った店舗'],
+                        ['route'=>'cmtedstore','label'=>'口コミ一覧']
                         ];
                         @endphp
                         @foreach($menu as $nav)
@@ -85,5 +85,8 @@
                 @yield('content')
             </main>
         </div>
+        <nav class="navbar fixed-bottom navbar-light  bg-white border-top border-secondary">
+            <a class="text-muted" href="#">@2021 -NGUYEN THANH LONG</a>
+        </nav>
     </body>
 </html>

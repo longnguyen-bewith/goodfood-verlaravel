@@ -22,16 +22,19 @@ Route::get('/hello', function () {
 Route::get('/userinfo', 'UserinfoController@index')->name('userinfo');
 Route::get('/userinfo/edit', 'UserinfoController@edit')->name('edituserinfo');
 Route::post('/userinfo/update', 'UserinfoController@update')->name('updateuserinfo');
-
+Route::get('/signedstore', 'UserinfoController@signedstore')->name('signedstore');
+Route::get('/likedstore', 'UserinfoController@likedstore')->name('likedstore');
+Route::get('/cmtedstore', 'UserinfoController@cmtedstore')->name('cmtedstore');
 
 Route::get('/storeinfo/{id}', 'StoreinfoController@index')->name('storeinfo');
 Route::get('/likeordis/{id}/{like}', 'StoreinfoController@like')->name('likeordis');
 Route::post('/cmtstore', 'StoreinfoController@cmtstore')->name('cmtstore');
-Route::get('/signstore/', function () {
-    return view('signstore');
-})->name('signstore');
+Route::get('/signstore/','StoreinfoController@showsignstore')->name('signstore');
 Route::post('/confirmstore', 'StoreinfoController@signstore')->name('confirmstore');
-
+Route::post('/delcmt', 'StoreinfoController@delcmt')->name('delcmt');
+Route::post('/delstore', 'StoreinfoController@delstore')->name('delstore');
+Route::post('/editstore', 'StoreinfoController@editstore')->name('editstore');
+Route::post('/confirmeditstore', 'StoreinfoController@confirmeditstore')->name('confirmeditstore');
 
 Auth::routes();
 
