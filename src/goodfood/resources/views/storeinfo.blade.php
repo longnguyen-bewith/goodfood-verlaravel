@@ -133,8 +133,9 @@
                     @foreach($cmt as $c)
                     <div class="row mt-4 bg-light">
                         <div class="col-md-12 col-form-label text-md-right">
-                            {{ __($c->name) }} at {{ __($c->created_at) }}
+                            <i class="fa fa-user-circle-o"></i>{{ __($c->name) }}  
                         </div>
+                        <div class="col-md-12 col-form-label text-md-right text-muted">{{ __($c->created_at) }}にリビュー済み</div>
                         <div class="col-md-12 text-md-right">
                             @for($i = 1; $i <= round($c->votes); $i ++)
                             <span class="fa fa-star checked">

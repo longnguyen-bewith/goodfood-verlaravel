@@ -24,9 +24,9 @@
                         @foreach($store as $data)
                         <div class="col-md-12 col-form-label bg-light mt-4">
                             <a href="/storeinfo/{{ $data->sid }}">
-                                <div class="text-right">{{ __($data->storename) }}
+                                <div class="text-right"><i class="fa fa-share"></i>{{ __($data->storename) }}
                                 </div>
-                                <div class="text-right">{{ __($data->created_at) }}
+                                <div class="text-right text-muted">{{ __($data->created_at) }}にリビュー済み
                                 </div>
                                 <div class="text-right">
                                     @for($i = 1; $i <= round($data->votes); $i ++)
