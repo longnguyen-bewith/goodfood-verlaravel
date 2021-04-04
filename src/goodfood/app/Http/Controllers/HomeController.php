@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {   
-        $sql    = "SELECT sid FROM `store`  JOIN `users` ON id=uid WHERE (storename like '%$request->key%' OR name like '%$request->key%')";
+        $sql    = "SELECT sid FROM `store`  JOIN `users` ON id=uid WHERE (storename like '%$request->key%' OR name like '%$request->key%' OR address like '%$request->key%')";
         
 
         //checkbox
