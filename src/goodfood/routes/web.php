@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('hello');
 });
 Route::get('/hello', function () {
-    return view('welcome');
+    return view('hello');
 });
 Route::get('/userinfo', 'UserinfoController@index')->name('userinfo');
 Route::get('/userinfo/edit', 'UserinfoController@edit')->name('edituserinfo');
