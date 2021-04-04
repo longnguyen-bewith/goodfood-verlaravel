@@ -9,8 +9,8 @@
                     <form class="form-inline" method="GET" action="/home">
                         <input class="form-control mr-sm-2" type="search" name="key" placeholder="検索" aria-label="Search"
                         value="{{ $request->key }}">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
-                        <a href="home/"><button type="button"class="btn btn-sm btn-outline-secondary">取消</button></a>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>検索</button>
+                        <a href="home/"><button type="button"class="btn btn-sm btn-outline-secondary"><i class="fa fa-refresh"></i>取消</button></a>
                     </nav>
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     条件追加
@@ -28,7 +28,7 @@
                                 @php
                                 $role=["和食","洋食","中華料理","焼肉","麺料理 ","カフェ","その他 "];
                                 @endphp
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     @foreach(  $role as $check)
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name={{ $check }} value=1
@@ -38,7 +38,7 @@
                                     </label>
                                     @endforeach
                                 </div>
-                                <div class="col-md-8 text-right">
+                                <div class="col-md-6 text-left">
                                     <div class="radio">
                                         <label><input type="radio" name="isor" value=0
                                         @if($request->isor == 0)checked="" @endif >全て一致</label>
