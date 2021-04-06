@@ -9,7 +9,7 @@
 - docker-compose restart
 
 ## migrate DB
-- open .env
+- rename .envexample to .env
 - DB_HOST=mysql --> DB_HOST=127.0.0.1:3696
 - cd ./goodfood-verlaravel/src/goodfood 
 - php artisan migrate
