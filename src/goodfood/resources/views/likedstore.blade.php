@@ -39,6 +39,27 @@
                 <div class="card-footer ">
                 </div>
             </div>
+            <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        @if(1>0)
+                        <li class="page-item"><button type="submit" class="page-link" name="page" value="{{ 1-1  }}">prev</button></li>
+                        @endif
+                        @if(1)
+                        <li class="page-item"><div class="input-group-prepend"><button class="page-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{1 }} of {{ 1 }}</button>
+                            <div class="dropdown-menu">
+                                @for($i=0;$i<2;$i++)
+                                <button class="page-item dropdown-item" value="{{ $i }}" name="page">{{ $i+1 }}</button>
+                                @endfor
+                            </div>
+                        </div>
+                        @endif
+                        
+                    </li>
+                    @if(1)
+                    <li class="page-item"><button type="submit" class="page-link" name="page" value="{{ 1 }}">next</button></li>
+                    @endif
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
