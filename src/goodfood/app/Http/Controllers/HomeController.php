@@ -64,7 +64,7 @@ class HomeController extends Controller
         $numberofid = count($takenumberofid);
 
         $page= $request->page ?? 0 ;
-        $sql.=" LIMIT 10 OFFSET"." ".$page*10;
+        $sql.=" LIMIT 10 OFFSET ".$page*10;
         $takesid = DB::select($sql);
         
         foreach( $takesid as $order){

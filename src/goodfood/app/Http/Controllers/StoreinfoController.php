@@ -17,10 +17,10 @@ class StoreinfoController extends Controller
  *
  * @return \Illuminate\Http\Response
  */
-    public function index($id)
+    public function index(Request $request,$id)
     {
 //
-
+        $page = $request->page ?? 0;
         $sql    = "SELECT * FROM `store` WHERE sid=$id";
         $data   = DB::select($sql);
         $sql    = "SELECT role FROM `role` WHERE sid=$id";
@@ -29,12 +29,12 @@ class StoreinfoController extends Controller
         $like   = DB::select($sql);
         $sql    = "SELECT  IFNULL(ROUND(AVG(votes),1),0) vote , COUNT(votes) sum FROM `storecmt` RIGHT JOIN store USING(sid) WHERE sid=$id GROUP BY sid";
         $vote   = DB::select($sql);
-        $sql    = "SELECT  u.name,c.uid ,votes,cmt, c.created_at  FROM `storecmt`  c  JOIN store  s USING(sid)   JOIN users u ON c.uid=u.id WHERE sid=$id ORDER BY c.created_at DESC"  ;
+        $sql    = "SELECT  u.name,c.uid ,votes,cmt, c.created_at,cid  FROM `storecmt`  c  JOIN store  s USING(sid)   JOIN users u ON c.uid=u.id WHERE sid=$id ORDER BY c.created_at DESC LIMIT 5 OFFSET ".$page*5  ;
         $cmt    = DB::select($sql);
         $uid    = Auth::user()->id;
         $sql    = "SELECT sid FROM `storelike` WHERE sid=$id AND $uid=uid";
         $islike = DB::select($sql);
-        return view('storeinfo', compact('data', 'data2', 'vote', 'like', 'cmt', 'islike', 'id'));
+        return view('storeinfo', compact('data', 'data2', 'vote', 'like', 'cmt', 'islike', 'id','page'));
         //return $islike;
     }
 
@@ -97,13 +97,23 @@ class StoreinfoController extends Controller
             'point'    => ['required'],
             'comment' => ['required'],
         ]);
+        if($request->image){
+        $data = $request->validate([
+            'image' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+        ]);
+        }
+        
         $time=now();
 
         $sql  = "INSERT INTO `storecmt`(`uid`, `sid`, `cmt`, `votes`, `created_at`) VALUES ($uid,$request->sid,'$request->comment ',$request->point,now())";
-        $cmt= DB::insert($sql);
-        
 
-        return redirect('/storeinfo/' . $request->sid);;
+        $cmt= DB::insert($sql);
+        if($request->image){
+        $cmtid = DB::getPdo()->lastInsertId();
+        $request->image->move(public_path('img'), $cmtid);
+        }
+
+        return redirect('/storeinfo/' . $request->sid);
     }
 
      public function signstore(Request $request)
