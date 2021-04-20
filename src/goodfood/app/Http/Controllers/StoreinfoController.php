@@ -68,7 +68,9 @@ class StoreinfoController extends Controller
      public function delcmt(Request $request)
     {
 //      
+        if((file_exists(public_path('img/'.$request->cid)))){
         unlink(public_path('/img/'.$request->cid));
+        }
         $sql  = "DELETE FROM `storecmt` WHERE cid=$request->cid";
         $data = DB::delete($sql);
         return redirect('/cmtedstore');
