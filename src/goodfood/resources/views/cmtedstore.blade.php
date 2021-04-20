@@ -60,6 +60,27 @@
                 <div class="card-footer ">
                 </div>
             </div>
+            <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        @if($page>0)
+                        <li class="page-item"><a class="page-link" href="?page={{ $page-1  }}">prev</a></li>
+                        @endif
+                        @if($times[0]->times)
+                        <li class="page-item"><div class="input-group-prepend"><button class="page-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $page+1 }} of {{ CEIL($times[0]->times/5) }}</button>
+                            <div class="dropdown-menu">
+                                @for($i=0;$i<CEIL($times[0]->times/5);$i++)
+                                <a class="page-link" href="?page={{ $i  }}">{{ $i+1 }}</a>
+                                @endfor
+                            </div>
+                        </div>
+                        @endif
+                        
+                    </li>
+                    @if($times[0]->times/5>$page+1)
+                    <li class="page-item"><a class="page-link" href="?page={{ $page+1  }}">next</a></li>
+                    @endif
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

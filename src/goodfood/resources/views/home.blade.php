@@ -9,11 +9,8 @@
                     <form class="form-inline" method="GET" action="/home">
                         <input class="form-control mr-sm-2" type="search" name="key" placeholder="検索" aria-label="Search"
                         value="{{ $request->key }}">
-
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>検索</button>
                         <a href="home/"><button type="button"class="btn btn-sm btn-outline-secondary"><i class="fa fa-refresh"></i>取消</button></a>
-
-
                     </nav>
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     条件追加
@@ -29,11 +26,9 @@
                                     </select>
                                 </div>
                                 @php
-                                $role=["和食","洋食","中華料理","焼肉","麺料理 ","カフェ","その他 "];
+                                $role=["和食","洋食","中華料理","焼肉","麺料理","カフェ","その他"];
                                 @endphp
-
                                 <div class="col-md-6">
-
                                     @foreach(  $role as $check)
                                     <label class="checkbox-inline">
                                         <input type="checkbox" name={{ $check }} value=1
@@ -43,9 +38,7 @@
                                     </label>
                                     @endforeach
                                 </div>
-
                                 <div class="col-md-6 text-left">
-
                                     <div class="radio">
                                         <label><input type="radio" name="isor" value=0
                                         @if($request->isor == 0)checked="" @endif >全て一致</label>
@@ -57,13 +50,34 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="card-footer ">
+                        合計：{{ $numberofid }}件
+                    </div>
                 </div>
-                <div class="card-footer ">
-                    合計：{{ $numberofid }}件
-                </div>
-            </div>
-            @for($i=0;$i<$numberofid;$i++)
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        @if($page>0)
+                        <li class="page-item"><button type="submit" class="page-link" name="page" value="{{ $page-1  }}">prev</button></li>
+                        @endif
+                        @if(count($takesid))
+                        <li class="page-item"><div class="input-group-prepend"><button class="page-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $page+1 }} of {{ CEIL($numberofid/10) }}</button>
+                            <div class="dropdown-menu">
+                                @for($i=0;$i<CEIL($numberofid/10);$i++)
+                                <button class="page-item dropdown-item" value="{{ $i }}" name="page">{{ $i+1 }}</button>
+                                @endfor
+                            </div>
+                        </div>
+                        @endif
+                        
+                    </li>
+                    @if(CEIL($numberofid/10)>$page+1)
+                    <li class="page-item"><button type="submit" class="page-link" name="page" value="{{ $page+1 }}">next</button></li>
+                    @endif
+                </ul>
+            </nav>
+            
+            @for($i=0;$i<count($takesid);$i++)
             <div class="card mt-4">
                 <div class="card-header">
                     <a href="/storeinfo/{{ $store[$i][0]->sid }}"><i class="fa fa-share"></i>-{{ __( $store[$i][0]->storename ) }}</a>
@@ -85,9 +99,30 @@
             </div>
         </div>
         @endfor
-    </div>
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                @if($page>0)
+                <li class="page-item"><button type="submit" class="page-link" name="page" value="{{ $page-1  }}">prev</button></li>
+                @endif
+                @if(count($takesid))
+                <li class="page-item"><div class="input-group-prepend"><button class="page-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $page+1 }} of {{ CEIL($numberofid/10) }}</button>
+                    <div class="dropdown-menu">
+                        @for($i=0;$i<CEIL($numberofid/10);$i++)
+                        <button class="page-item dropdown-item" value="{{ $i }}" name="page">{{ $i+1 }}</button>
+                        @endfor
+                    </div>
+                </div>
+                @endif
+                
+            </li>
+            @if(CEIL($numberofid/10)>$page+1)
+            <li class="page-item"><button type="submit" class="page-link" name="page" value="{{ $page+1 }}">next</button></li>
+            @endif
+        </ul>
+    </nav>
+</form>
 </div>
-
+</div>
 </div>
 </div>
 @endsection

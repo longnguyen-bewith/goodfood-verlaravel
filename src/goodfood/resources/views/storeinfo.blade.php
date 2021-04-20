@@ -69,7 +69,7 @@
                             </a>
                             @endif
                             <div class="form-group">
-                                <form method="POST" action="{{ route('cmtstore') }}">
+                                <form method="POST" action="{{ route('cmtstore') }}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="sid" value="{{$id}}">
 
@@ -95,6 +95,7 @@
                                 </div>
                                 <textarea class="form-control" id="comment" name="comment" rows="5">
                                 </textarea>
+                                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1"></input>
                                 
                                     <button type="submid" class="btn btn-block btn-primary">
                                         {{ __('送信') }}
@@ -113,6 +114,13 @@
                                     <div class="text-danger">
                                         <strong>
                                             {{ "採点は必須です。" }}
+                                        </strong>
+                                    </div>
+                                    @enderror
+                                    @error('image')
+                                    <div class="text-danger">
+                                        <strong>
+                                            {{ $message  }}
                                         </strong>
                                     </div>
                                     @enderror
@@ -149,7 +157,12 @@
                         <div class="col-md-12 col-form-label text-md-left">
                             {{ __($c->cmt) }}
                         </div>
+                        @if((file_exists(public_path('img/'.$c->cid))))
                         <div class="col-md-12">
+                            <img src="{{ asset('img/'.$c->cid) }}" class="img-fluid" >
+                        </div>
+                        @endif
+                        <div class="col-md-12 bg-light"><br>
                         </div>
                     </div>
                     @endforeach
@@ -157,6 +170,27 @@
                 <div class="card-footer ">
                 </div>
             </div>
+            <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        @if($page>0)
+                        <li class="page-item"><a class="page-link" href="?page={{ $page-1  }}">prev</a></li>
+                        @endif
+                        @if($vote[0]->sum)
+                        <li class="page-item"><div class="input-group-prepend"><button class="page-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $page+1 }} of {{ CEIL($vote[0]->sum/5) }}</button>
+                            <div class="dropdown-menu">
+                                @for($i=0;$i<CEIL($vote[0]->sum/5);$i++)
+                                <a class="page-link" href="?page={{ $i }}">{{ $i+1 }}</a>
+                                @endfor
+                            </div>
+                        </div>
+                        @endif
+                        
+                    </li>
+                    @if($vote[0]->sum/5>$page+1)
+                    <li class="page-item"><a class="page-link" href="?page={{ $page+1  }}">next</a></li>
+                    @endif
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

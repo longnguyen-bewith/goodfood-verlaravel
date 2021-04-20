@@ -72,39 +72,42 @@ class UserinfoController extends Controller
  * @return \Illuminate\Http\Response
  */
 
-    public function signedstore()
+    public function signedstore(Request $request)
     {
-//
+//      
+        $page = $request->page ?? 0;
         $uid   = Auth::user()->id;
         $sql   = "SELECT count(*) times FROM `store` WHERE uid=$uid";
         $times = DB::select($sql);
-        $sql   = "SELECT *  FROM `store` WHERE uid=$uid ORDER BY created_at DESC";
+        $sql   = "SELECT *  FROM `store` WHERE uid=$uid ORDER BY created_at DESC LIMIT 5 OFFSET ".$page*5;
         $store = DB::select($sql);
 
-        return view('signedstore', compact('times', 'store'));
+        return view('signedstore', compact('times', 'store','page'));
 
     }
 
-    public function likedstore()
+    public function likedstore(Request $request)
     {
-//
+//      
+        $page = $request->page ?? 0;
     	$uid   = Auth::user()->id;
         $sql   = "SELECT count(*) times FROM `storelike` WHERE uid=$uid";
         $times = DB::select($sql);
-        $sql   = " SELECT * FROM `storelike` a JOIN store  b USING(sid) WHERE a.uid=$uid";
+        $sql   = " SELECT * FROM `storelike` a JOIN store  b USING(sid) WHERE a.uid=$uid  LIMIT 5 OFFSET ".$page*5;
         $store = DB::select($sql);
-        return view('likedstore',compact('times','store'));
+        return view('likedstore',compact('times','store','page'));
     }
-        public function cmtedstore()
+        public function cmtedstore(Request $request)
     {
 //	
+        $page = $request->page ?? 0;
     	$uid   = Auth::user()->id;
         $sql   = "SELECT count(*) times FROM `storecmt` WHERE uid=$uid";
         $times = DB::select($sql);
-        $sql   = " SELECT storename,votes,a.created_at AS created_at ,sid,cmt ,cid FROM `storecmt` a JOIN store  b USING(sid) WHERE a.uid=$uid ORDER BY a.created_at DESC";
+        $sql   = " SELECT storename,votes,a.created_at AS created_at ,sid,cmt ,cid FROM `storecmt` a JOIN store  b USING(sid) WHERE a.uid=$uid ORDER BY a.created_at DESC  LIMIT 5 OFFSET ".$page*5;
         $store = DB::select($sql);
    
-        return view('cmtedstore',compact('times','store'));
+        return view('cmtedstore',compact('times','store','page'));
     }
     public function update(Request $request)
     {

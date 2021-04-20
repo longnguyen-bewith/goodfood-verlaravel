@@ -60,8 +60,12 @@ class HomeController extends Controller
          
         
 
-        $takesid   = DB::select($sql);
-        $numberofid = count($takesid);
+        $takenumberofid   = DB::select($sql);
+        $numberofid = count($takenumberofid);
+
+        $page= $request->page ?? 0 ;
+        $sql.=" LIMIT 10 OFFSET ".$page*10;
+        $takesid = DB::select($sql);
         
         foreach( $takesid as $order){
         $sql    = "SELECT * FROM `store`  JOIN `users` ON id=uid WHERE $order->sid=sid";
@@ -74,10 +78,10 @@ class HomeController extends Controller
         $type[] = DB::select($sql);
         }
         if($numberofid>0){
-        return view('home',compact('numberofid','store','like','vote','type','request'));
+        return view('home',compact('numberofid','store','like','vote','type','request','page','takesid'));
         //return $takesid;
         }else{
-        return view('home',compact('numberofid','request'));
+        return view('home',compact('numberofid','request','page','takesid'));
         }
         
     }
