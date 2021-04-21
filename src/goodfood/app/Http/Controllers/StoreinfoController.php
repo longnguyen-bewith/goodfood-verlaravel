@@ -80,6 +80,13 @@ class StoreinfoController extends Controller
         public function delstore(Request $request)
     {
 //      
+        $sql  = "SELECT cid FROM `storecmt` WHERE sid=$request->sid";
+        $data = DB::select($sql);
+        foreach($data as $c){
+        if((file_exists(public_path('img/'.$c->cid)))){
+        unlink(public_path('/img/'.$c->cid));
+        }
+        }
         $sql  = "DELETE FROM `store` WHERE sid=$request->sid";
         $data = DB::delete($sql);
         $sql  = "DELETE FROM `storelike` WHERE sid=$request->sid";
@@ -89,7 +96,6 @@ class StoreinfoController extends Controller
         $sql  = "DELETE FROM `storecmt` WHERE sid=$request->sid";
         $data = DB::delete($sql);
         return redirect('/signedstore');
-        //return $cmt;
     }
 
     public function cmtstore(Request $request)
